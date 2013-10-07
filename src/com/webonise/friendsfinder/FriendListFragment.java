@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.facebook.Response;
 import com.webonise.friendsfinder.adapter.FriendListAdapter;
+import com.webonise.friendsfinder.model.FriendModel;
 import com.webonise.friendsfinder.parser.JsonParser;
 import com.webonise.friendsfinder.webservice.FacebookService;
 
@@ -20,7 +21,7 @@ public class FriendListFragment extends Fragment {
 	MainActivity mainActivity;
 	String stringArrayFriends[];
 	ListView listView;
-	List<String> friendsList;
+	List<FriendModel> friendsList;
 	private static String TAG = "FriendListFragment";
 
 	@Override
@@ -42,20 +43,21 @@ public class FriendListFragment extends Fragment {
 
 	public void onFriendsListResult(Response response) {
 		Response mResponse = response;
-
+		friendsList=new ArrayList<FriendModel>();
 		JsonParser jsonParser = new JsonParser();
 		//friendsList = new ArrayList<String>();
-		stringArrayFriends = jsonParser.parseJsonObject(mResponse);
+		friendsList = jsonParser.parseJsonObject(mResponse);
+		//Log.v("list", friendsList.get(0).getName());
 		callForAdapter();
 
 	}
 
 	private void callForAdapter() {
 		
-//		for (int i = 0; i < stringArrayFriends.length; i++)
-//			Log.e(null, stringArrayFriends[i]);
+//		for (int i = 0; i < friendsList.size(); i++)
+//			Log.e(null, friendsList.get(i).getName());
 
-		FriendListAdapter adapter = new FriendListAdapter(mainActivity,stringArrayFriends);
+		FriendListAdapter adapter = new FriendListAdapter(mainActivity,friendsList);
 		listView.setAdapter(adapter);
 	}
 

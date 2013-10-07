@@ -1,5 +1,8 @@
 package com.webonise.friendsfinder.adapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,23 +12,26 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.webonise.friendsfinder.R;
+import com.webonise.friendsfinder.model.FriendModel;
 
 public class FriendListAdapter extends BaseAdapter {
 
 	Context mContext;
-	private static String stringFriendsList[] = null;
+	private List<FriendModel> friendsList;
 
-	public FriendListAdapter(Context mContext, String[] stringArrayFriends) {
+	public FriendListAdapter(Context mContext, List<FriendModel> friendsList) {
 		this.mContext = mContext;
-		this.stringFriendsList=stringArrayFriends;
-		for (int i = 0; i < stringFriendsList.length; i++) 
-			Log.i(null, stringFriendsList[i]);
+		this.friendsList = new ArrayList<FriendModel>();
+		this.friendsList = friendsList;
+//		for (int i = 0; i < this.friendsList.size(); i++)
+//			Log.e(null, friendsList.get(i).getName());
+
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return stringFriendsList.length;
+		return friendsList.size();
 	}
 
 	@Override
@@ -46,7 +52,7 @@ public class FriendListAdapter extends BaseAdapter {
 		convertView = inflater.inflate(R.layout.friend_list_element, null);
 
 		TextView textView = (TextView) convertView.findViewById(R.id.friend);
-		textView.setText(stringFriendsList[position]);
+		textView.setText(friendsList.get(position).getName());
 
 		return convertView;
 	}
