@@ -3,7 +3,7 @@ package com.webonise.friendsfinder.model;
 public class FriendModel {
 private String name;
 private String location;
-private String country;
+private String state;
 private int id;
 private int longitude;
 private int latitude;
@@ -16,11 +16,12 @@ public void setName(String name) {
 	this.name = name;
 }
 
-public String getCountry() {
-	return country;
+
+public String getState() {
+	return state;
 }
-public void setCountry(String country) {
-	this.country = country;
+public void setState(String state) {
+	this.state = state;
 }
 public String getLocation() {
 	return location;

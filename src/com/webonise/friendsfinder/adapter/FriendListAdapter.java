@@ -4,19 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.webonise.friendsfinder.R;
+import com.webonise.friendsfinder.helper.UrlImageHandler;
 import com.webonise.friendsfinder.model.FriendModel;
 
 public class FriendListAdapter extends BaseAdapter {
 
 	Context mContext;
+	UrlImageHandler urlImage=null;
 	private List<FriendModel> friendsList;
 
 	public FriendListAdapter(Context mContext, List<FriendModel> friendsList) {
@@ -51,8 +55,18 @@ public class FriendListAdapter extends BaseAdapter {
 		LayoutInflater inflater = LayoutInflater.from(mContext);
 		convertView = inflater.inflate(R.layout.friend_list_element, null);
 
-		TextView textView = (TextView) convertView.findViewById(R.id.friend);
-		textView.setText(friendsList.get(position).getName());
+		TextView name = (TextView) convertView.findViewById(R.id.friend);
+		name.setText(friendsList.get(position).getName());
+		
+		TextView location = (TextView) convertView.findViewById(R.id.location);
+		location.setText(friendsList.get(position).getLocation());
+		
+		TextView state = (TextView) convertView.findViewById(R.id.state);
+		state.setText(" , "+ friendsList.get(position).getState());
+		urlImage=UrlImageHandler.getInstance();
+		Bitmap profilePic= urlImage.getUrlImage(friendsList.get(position).getImageUrl());
+		ImageView profilImageView=(ImageView)convertView.findViewById(R.id.profile_pic);
+		profilImageView.setImageBitmap(profilePic);
 
 		return convertView;
 	}

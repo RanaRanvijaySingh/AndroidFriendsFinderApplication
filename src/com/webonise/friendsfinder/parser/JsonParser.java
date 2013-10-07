@@ -15,6 +15,7 @@ import com.webonise.friendsfinder.model.FriendModel;
 
 public class JsonParser {
 
+	private static final String TAG="JsonParser";
 	public List<FriendModel> parseJsonObject(Response response) {
 
 		List<FriendModel> friendModelList = new ArrayList<FriendModel>();
@@ -41,17 +42,15 @@ public class JsonParser {
 				try {
 					JSONObject currentLocation = jsonArray.getJSONObject(i)
 							.getJSONObject("current_location");
-					friendModel.setCountry(currentLocation.getString("country"));
+					friendModel.setState(currentLocation.getString("state"));
 					friendModel.setLongitude(currentLocation.getInt("longitude"));
 					friendModel.setLatitude(currentLocation.getInt("latitude"));
 					friendModel.setLocation(currentLocation.getString("city"));
 				} catch (Exception currentLocation) {
-
+					Log.d(TAG,"current_location is null");
 				}
-
 				// Log.v("json", i+" "+friendModel.getName());
 				friendModelList.add(friendModel);
-
 			}
 			// String jsonName=jsonArray.getJSONObject(0).getString("name");
 
