@@ -14,7 +14,6 @@ import com.webonise.friendsfinder.MainActivity;
 
 public class FacebookService {
 
-	private Response mResponse;
 	private static FacebookService service=new FacebookService();
 	private FacebookService()
 	{
@@ -78,25 +77,13 @@ public class FacebookService {
 			
 					public void onCompleted(Response response) {
 					
-						setmResponse(response);
 						Log.i(null, "Got results: " + response.toString());
 						context.onFriendsListResult(response);
 					}
 				});
 		Request.executeBatchAsync(request);
 		
-		//return getmResponse();
+	
 	}
-
-	public Response getmResponse() {
-		Log.v(null,"in get");
-		return mResponse;
-	}
-
-	public void setmResponse(Response mResponse) {
-		Log.v(null,"in set");
-		this.mResponse = mResponse;
-	}
-
 	
 }
