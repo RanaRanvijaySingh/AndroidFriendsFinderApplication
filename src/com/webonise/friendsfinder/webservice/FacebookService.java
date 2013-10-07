@@ -65,7 +65,7 @@ public class FacebookService {
 
 		// String fqlQuery =
 		// "SELECT current_location FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me())";
-		String fqlQuery = "select name from user where uid in (select uid2 from friend where uid1 = me())";
+		String fqlQuery = "select name ,pic_square,current_location   from user where uid in (select uid2 from friend where uid1 = me())";
 		// String fqlQuery
 		// ="me?fields=id,name,first_name,last_name,email,picture.width(150).height(150),username,location,friends.fields(name,picture.width(150).height(150),username,location)";
 		Bundle bundle = new Bundle();
