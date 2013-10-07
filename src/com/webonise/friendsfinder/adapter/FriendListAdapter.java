@@ -1,6 +1,7 @@
 package com.webonise.friendsfinder.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,13 @@ import com.webonise.friendsfinder.R;
 public class FriendListAdapter extends BaseAdapter {
 
 	Context mContext;
-	private static final String stringFriendsList[] = { "Friend1", "Friend2",
-		"Friend3", "Friend4", "Friend5", "Friend6", "Friend7","Friend8","Friend9","Friend10" };
+	private static String stringFriendsList[] = null;
 
-	public FriendListAdapter(Context mContext) {
-		this.mContext= mContext;
+	public FriendListAdapter(Context mContext, String[] stringArrayFriends) {
+		this.mContext = mContext;
+		this.stringFriendsList=stringArrayFriends;
+		for (int i = 0; i < stringFriendsList.length; i++) 
+			Log.i(null, stringFriendsList[i]);
 	}
 
 	@Override
@@ -39,12 +42,12 @@ public class FriendListAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		LayoutInflater inflater=LayoutInflater.from(mContext);
-		convertView=inflater.inflate(R.layout.friend_list_element, null);
-		
-		TextView textView=(TextView)convertView.findViewById(R.id.friend);
+		LayoutInflater inflater = LayoutInflater.from(mContext);
+		convertView = inflater.inflate(R.layout.friend_list_element, null);
+
+		TextView textView = (TextView) convertView.findViewById(R.id.friend);
 		textView.setText(stringFriendsList[position]);
-		
+
 		return convertView;
 	}
 }
