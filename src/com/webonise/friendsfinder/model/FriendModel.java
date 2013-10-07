@@ -5,8 +5,8 @@ private String name;
 private String location;
 private String state;
 private int id;
-private int longitude;
-private int latitude;
+private double longitude;
+private double latitude;
 private String imageUrl;
 
 public String getName() {
@@ -35,16 +35,17 @@ public int getId() {
 public void setId(int id) {
 	this.id = id;
 }
-public int getLongitude() {
+
+public double getLongitude() {
 	return longitude;
 }
-public void setLongitude(int longitude) {
+public void setLongitude(double longitude) {
 	this.longitude = longitude;
 }
-public int getLatitude() {
+public double getLatitude() {
 	return latitude;
 }
-public void setLatitude(int latitude) {
+public void setLatitude(double latitude) {
 	this.latitude = latitude;
 }
 public String getImageUrl() {

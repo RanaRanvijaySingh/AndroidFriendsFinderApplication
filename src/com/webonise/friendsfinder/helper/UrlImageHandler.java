@@ -8,6 +8,7 @@ import java.net.URLConnection;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 public class UrlImageHandler {
 	private static UrlImageHandler imageHandler=new UrlImageHandler();
@@ -54,6 +55,7 @@ public class UrlImageHandler {
 				inputStream = httpConn.getInputStream();
 			}
 		} catch (Exception ex) {
+			Log.e("Error", ex.toString());
 		}
 		return inputStream;
 	}

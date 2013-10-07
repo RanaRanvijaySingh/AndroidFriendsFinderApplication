@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
+import android.util.Log;
 
 import com.facebook.Session;
 import com.webonise.friendsfinder.webservice.FacebookService;
@@ -11,7 +12,7 @@ import com.webonise.friendsfinder.webservice.FacebookService;
 public class MainActivity extends FragmentActivity {
 
 	private static final String TAG = "MainActivity";
-
+	FragmentTabHost mTabHost;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,7 +25,7 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	private void setTabContent() {
-		FragmentTabHost mTabHost;
+		
 		mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
 		mTabHost.setup(this, getSupportFragmentManager(), R.id.tabFrameLayout);
 
@@ -32,7 +33,7 @@ public class MainActivity extends FragmentActivity {
 				MapFragment.class, null);
 		mTabHost.addTab(mTabHost.newTabSpec("friends").setIndicator("Friends"),
 				FriendListFragment.class, null);
-
+		mTabHost.setCurrentTab(0);
 	}
 
 	@Override
@@ -40,5 +41,15 @@ public class MainActivity extends FragmentActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 		Session.getActiveSession().onActivityResult(this, requestCode,
 				resultCode, data);
+	}
+
+	public void getLocationInMap(double longitude, double latitude, String name,String imageUrl) {
+
+		mTabHost.setCurrentTab(0);
+		MapFragment mapFragment= new MapFragment();
+		mapFragment.setMarker(latitude, longitude, name,imageUrl);
+		Log.v(null,"switched");
+		
+		
 	}
 }

@@ -81,6 +81,7 @@ public class FacebookService {
 						context.onFriendsListResult(response);
 					}
 				});
+		Log.i("", " =============="+request.toString());
 		Request.executeBatchAsync(request);
 		
 	

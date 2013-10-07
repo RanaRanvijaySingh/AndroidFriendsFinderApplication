@@ -25,6 +25,9 @@ public class JsonParser {
 		// Log.v("json", response.getGraphObjectAs(new GraphObject));
 		GraphObject graphObject = response.getGraphObject();
 		JSONObject jsonObject = graphObject.getInnerJSONObject();
+		
+	//	JSONObject jsonObject = new JSONObject();
+		
 
 		try {
 			JSONArray jsonArray = jsonObject.getJSONArray("data");
@@ -43,11 +46,10 @@ public class JsonParser {
 					JSONObject currentLocation = jsonArray.getJSONObject(i)
 							.getJSONObject("current_location");
 					friendModel.setState(currentLocation.getString("state"));
-					friendModel.setLongitude(currentLocation.getInt("longitude"));
-					friendModel.setLatitude(currentLocation.getInt("latitude"));
+					friendModel.setLongitude(currentLocation.getDouble("longitude"));
+					friendModel.setLatitude(currentLocation.getDouble("latitude"));
 					friendModel.setLocation(currentLocation.getString("city"));
 				} catch (Exception currentLocation) {
-					Log.d(TAG,"current_location is null");
 				}
 				// Log.v("json", i+" "+friendModel.getName());
 				friendModelList.add(friendModel);

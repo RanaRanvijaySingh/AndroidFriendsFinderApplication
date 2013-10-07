@@ -63,10 +63,11 @@ public class FriendListAdapter extends BaseAdapter {
 		
 		TextView state = (TextView) convertView.findViewById(R.id.state);
 		state.setText(" , "+ friendsList.get(position).getState());
-		urlImage=UrlImageHandler.getInstance();
-		Bitmap profilePic= urlImage.getUrlImage(friendsList.get(position).getImageUrl());
-		ImageView profilImageView=(ImageView)convertView.findViewById(R.id.profile_pic);
-		profilImageView.setImageBitmap(profilePic);
+		
+//		urlImage=UrlImageHandler.getInstance();
+//		Bitmap profilePic= urlImage.getUrlImage(friendsList.get(position).getImageUrl());
+//		ImageView profilImageView=(ImageView)convertView.findViewById(R.id.profile_pic);
+//		profilImageView.setImageBitmap(profilePic);
 
 		return convertView;
 	}

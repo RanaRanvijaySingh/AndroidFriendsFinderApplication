@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.facebook.Response;
@@ -38,26 +39,42 @@ public class FriendListFragment extends Fragment {
 		FacebookService mService = FacebookService.getIntance();
 		mService.getFriendsList(this);
 
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+
+				FriendModel friend = new FriendModel();
+				friend = friendsList.get(position);
+				Log.v("clicked", friend.getName());
+				Log.v("clicked", friend.getLocation());
+				Log.v("clicked", friend.getState());
+				Log.v("clicked", "" + friend.getLatitude());
+				Log.v("clicked", "" + friend.getLongitude());
+
+				mainActivity.getLocationInMap(friend.getLongitude(),
+						friend.getLatitude(), friend.getName(),
+						friend.getImageUrl());
+			}
+		});
 		return view;
 	}
 
 	public void onFriendsListResult(Response response) {
 		Response mResponse = response;
-		friendsList=new ArrayList<FriendModel>();
+		friendsList = new ArrayList<FriendModel>();
 		JsonParser jsonParser = new JsonParser();
-		//friendsList = new ArrayList<String>();
+		// friendsList = new ArrayList<String>();
 		friendsList = jsonParser.parseJsonObject(mResponse);
-		//Log.v("list", friendsList.get(0).getName());
+		// Log.v("list", friendsList.get(0).getName());
 		callForAdapter();
 
 	}
 
 	private void callForAdapter() {
-		
-//		for (int i = 0; i < friendsList.size(); i++)
-//			Log.e(null, friendsList.get(i).getName());
 
-		FriendListAdapter adapter = new FriendListAdapter(mainActivity,friendsList);
+		FriendListAdapter adapter = new FriendListAdapter(mainActivity,
+				friendsList);
 		listView.setAdapter(adapter);
 	}
 
