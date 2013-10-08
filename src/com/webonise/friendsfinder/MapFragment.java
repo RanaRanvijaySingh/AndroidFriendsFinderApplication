@@ -40,11 +40,16 @@ public class MapFragment extends Fragment {
 
 	void setMarker(double latitude, double longitude, String name,
 			String imageUrl) {
-		LatLng position = new LatLng(55.3, 9.9);
+		//initializeMap();
+		LatLng position = new LatLng(latitude,longitude);
 
 		//UrlImageHandler uImageHandler = UrlImageHandler.getInstance();
 //		Bitmap profilePic = uImageHandler.getUrlImage(imageUrl);
 
+		if(googleMap==null)
+		{
+			initializeMap();
+		}
 		Marker location = googleMap.addMarker(new MarkerOptions().visible(true)
 				.position(position).snippet(name));
 

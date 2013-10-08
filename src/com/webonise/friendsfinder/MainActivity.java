@@ -33,7 +33,7 @@ public class MainActivity extends FragmentActivity {
 				MapFragment.class, null);
 		mTabHost.addTab(mTabHost.newTabSpec("friends").setIndicator("Friends"),
 				FriendListFragment.class, null);
-		mTabHost.setCurrentTab(0);
+		mTabHost.setCurrentTab(1);
 	}
 
 	@Override

@@ -13,14 +13,17 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.internal.p;
 import com.webonise.friendsfinder.R;
 import com.webonise.friendsfinder.helper.UrlImageHandler;
 import com.webonise.friendsfinder.model.FriendModel;
+import com.webonise.friendsfinder.task.ImageLoaderTask;
 
 public class FriendListAdapter extends BaseAdapter {
 
 	Context mContext;
-	UrlImageHandler urlImage=null;
+	Bitmap profilePic;
+	
 	private List<FriendModel> friendsList;
 
 	public FriendListAdapter(Context mContext, List<FriendModel> friendsList) {
@@ -64,11 +67,17 @@ public class FriendListAdapter extends BaseAdapter {
 		TextView state = (TextView) convertView.findViewById(R.id.state);
 		state.setText(" , "+ friendsList.get(position).getState());
 		
-//		urlImage=UrlImageHandler.getInstance();
-//		Bitmap profilePic= urlImage.getUrlImage(friendsList.get(position).getImageUrl());
-//		ImageView profilImageView=(ImageView)convertView.findViewById(R.id.profile_pic);
-//		profilImageView.setImageBitmap(profilePic);
+		
+		ImageLoaderTask iLoaderTask=new ImageLoaderTask(this,friendsList.get(position));
+		iLoaderTask.execute();
+		ImageView profilImageView=(ImageView)convertView.findViewById(R.id.profile_pic);
+		profilImageView.setImageBitmap(profilePic);
 
 		return convertView;
+	}
+
+	public void setProfilePic(Bitmap result) {
+		profilePic=result;
+		
 	}
 }
