@@ -25,18 +25,15 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.header_bar);
 
 		FacebookService mService = FacebookService.getIntance();
 		mService.createFacebookSession(this);
 
 		initializeComponents();
 
-		FragmentTransaction transaction = fragmentManager.beginTransaction();
-		fListFragment = new FriendListFragment(this);
-		mapFragment = new MapFragment(this);
-		transaction.add(R.id.fragments, mapFragment);
-		transaction.commit();
+		Intent intent = new Intent(this, MapFragment.class);
+		startActivity(intent);
 
 	}
 
@@ -54,28 +51,28 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 				resultCode, data);
 	}
 
-	public void getLocationInMap(double longitude, double latitude,
-			String name, String imageUrl) {
-
-		// mTabHost.setCurrentTab(0);
-		// MapFragment mapFragment= new MapFragment();
-		// mapFragment.setMarker(latitude, longitude, name,imageUrl);
-		// Log.v(null,"switched");
-
-	}
+	// public void getLocationInMap(double longitude, double latitude,
+	// String name, String imageUrl) {
+	//
+	// // mTabHost.setCurrentTab(0);
+	// // MapFragment mapFragment= new MapFragment();
+	// // mapFragment.setMarker(latitude, longitude, name,imageUrl);
+	// // Log.v(null,"switched");
+	//
+	// }
 
 	public void getFragment(int intFragment) {
 		Log.v(null, "Clicked");
 		if (intFragment == 0) {
-			FragmentTransaction transaction = fragmentManager
-					.beginTransaction();
-			transaction.replace(R.id.fragments, mapFragment);
-			transaction.commit();
+//			FragmentTransaction transaction = fragmentManager
+//					.beginTransaction();
+//			transaction.replace(R.id.fragments, mapFragment);
+//			transaction.commit();
 		} else {
-			FragmentTransaction transaction = fragmentManager
-					.beginTransaction();
-			transaction.replace(R.id.fragments, fListFragment);
-			transaction.commit();
+//			FragmentTransaction transaction = fragmentManager
+//					.beginTransaction();
+//			transaction.replace(R.id.fragments, fListFragment);
+//			transaction.commit();
 		}
 	}
 

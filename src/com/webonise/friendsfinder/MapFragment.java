@@ -21,26 +21,28 @@ import com.google.android.gms.maps.model.MarkerOptions;
 @SuppressLint("ValidFragment")
 public class MapFragment extends FragmentActivity {
 
-	
-	MainActivity mainActivity;
 	private GoogleMap googleMap;
 
-	public MapFragment(MainActivity mainActivity) {
-		this.mainActivity = mainActivity;
-	}
-
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-
-		mainActivity = (MainActivity) this.getActivity();
-		View view = inflater.inflate(R.layout.map_fragment, container, false);
-
-		Log.v(null, "in the map fragment");
+	protected void onCreate(Bundle arg0) {
+		super.onCreate(arg0);
+		setContentView(R.layout.map_fragment);
 		initializeMap();
-		// setMarker(55.3,9.9,"Hamburg");
-		return view;
 	}
+	private void initializeMap() {
+		if (googleMap == null) {
+			SupportMapFragment supportMapFragment =(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+			googleMap = supportMapFragment.getMap();
+			if (googleMap == null) {
+				Toast.makeText(this, "Sorry the map is not initialize",
+						Toast.LENGTH_LONG).show();
+			}
+		}
+		Log.v(null, "Starting Google Map");
+	}
+
+
+	
 //
 //	void setMarker(double latitude, double longitude, String name,
 //			String imageUrl) {
@@ -61,18 +63,7 @@ public class MapFragment extends FragmentActivity {
 //		// .fromResource(R.drawable.ic_launcher)));
 //	}
 
-	private void initializeMap() {
-		if (googleMap == null) {
-			SupportMapFragment supportMapFragment = ((SupportMapFragment) getFragmentManager()
-					.findFragmentById(R.id.map));
-			googleMap = supportMapFragment.getMap();
-			if (googleMap == null) {
-				Toast.makeText(mainActivity, "Sorry the map is not initialize",
-						Toast.LENGTH_LONG).show();
-			}
-		}
-		Log.v(null, "Starting Google Map");
-	}
+	
 
 	// @Override
 	// public void onResume() {

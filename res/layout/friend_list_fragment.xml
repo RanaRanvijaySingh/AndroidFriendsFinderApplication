@@ -3,9 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-    <ListView android:id="@+id/frinds_list"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"></ListView>
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/header_bar" />
+
+    <ListView
+        android:id="@+id/frinds_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
 
 </LinearLayout>
