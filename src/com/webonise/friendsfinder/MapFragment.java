@@ -1,5 +1,6 @@
 package com.webonise.friendsfinder;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,14 +17,15 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.webonise.friendsfinder.helper.UrlImageHandler;
 
+@SuppressLint("ValidFragment")
 public class MapFragment extends Fragment {
 	private GoogleMap googleMap;
 	SupportMapFragment supportMapFragment;
 	MainActivity mainActivity;
 	View view;
 
-	public MapFragment(MainActivity mainActivity2) {
-		// TODO Auto-generated constructor stub
+	public MapFragment(MainActivity mainActivity) {
+		this.mainActivity = mainActivity;
 	}
 
 	@Override
@@ -37,21 +39,20 @@ public class MapFragment extends Fragment {
 			view = inflater.inflate(R.layout.map_fragment, container, false);
 		}
 
-		 initializeMap();
+		initializeMap();
 		// setMarker(55.3,9.9,"Hamburg");
 		return view;
 	}
 
 	void setMarker(double latitude, double longitude, String name,
 			String imageUrl) {
-		//initializeMap();
-		LatLng position = new LatLng(latitude,longitude);
+		// initializeMap();
+		LatLng position = new LatLng(latitude, longitude);
 
-		//UrlImageHandler uImageHandler = UrlImageHandler.getInstance();
-//		Bitmap profilePic = uImageHandler.getUrlImage(imageUrl);
+		// UrlImageHandler uImageHandler = UrlImageHandler.getInstance();
+		// Bitmap profilePic = uImageHandler.getUrlImage(imageUrl);
 
-		if(googleMap==null)
-		{
+		if (googleMap == null) {
 			initializeMap();
 		}
 		Marker location = googleMap.addMarker(new MarkerOptions().visible(true)
