@@ -22,6 +22,10 @@ public class MapFragment extends Fragment {
 	MainActivity mainActivity;
 	View view;
 
+	public MapFragment(MainActivity mainActivity2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

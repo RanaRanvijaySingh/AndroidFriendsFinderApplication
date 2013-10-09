@@ -3,6 +3,7 @@ package com.webonise.friendsfinder;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,6 +19,7 @@ import com.webonise.friendsfinder.model.FriendModel;
 import com.webonise.friendsfinder.parser.JsonParser;
 import com.webonise.friendsfinder.webservice.FacebookService;
 
+@SuppressLint("ValidFragment")
 public class FriendListFragment extends Fragment {
 	MainActivity mainActivity;
 	String stringArrayFriends[];
@@ -25,11 +27,15 @@ public class FriendListFragment extends Fragment {
 	List<FriendModel> friendsList;
 	private static String TAG = "FriendListFragment";
 
+	@SuppressLint("ValidFragment")
+	public FriendListFragment(MainActivity mainActivity) {
+		this.mainActivity=mainActivity;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		mainActivity = (MainActivity) this.getActivity();
 		View view = inflater.inflate(R.layout.friend_list_fragment, container,
 				false);
 		listView = (ListView) view.findViewById(R.id.frinds_list);
