@@ -11,14 +11,14 @@
         android:weightSum="1" >
 
         <Button
-            android:id="@+id/map"
+            android:id="@+id/button_map"
             android:text="@string/map"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5" />
 
         <Button
-            android:id="@+id/friends"
+            android:id="@+id/button_friends"
             android:text="@string/friends"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

@@ -6,7 +6,9 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -16,11 +18,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 @SuppressLint("ValidFragment")
-public class MapFragment extends Fragment {
+public class MapFragment extends Fragment implements OnClickListener {
 	private GoogleMap googleMap;
 	SupportMapFragment supportMapFragment;
 	MainActivity mainActivity;
-	
+
 	public MapFragment(MainActivity mainActivity) {
 		this.mainActivity = mainActivity;
 	}
@@ -30,10 +32,14 @@ public class MapFragment extends Fragment {
 			Bundle savedInstanceState) {
 
 		mainActivity = (MainActivity) this.getActivity();
-		View view=inflater.inflate(R.layout.map_fragment, container,false);
+		View view = inflater.inflate(R.layout.map_fragment, container, false);
+		Button buttonMap = (Button) view.findViewById(R.id.button_map);
+		Button buttonFriends = (Button) view.findViewById(R.id.button_friends);
+		buttonMap.setOnClickListener(this);
+		buttonMap.setOnClickListener(this);
 
-		Log.v(null,"in the map fragment");
-		//initializeMap();
+		Log.v(null, "in the map fragment");
+		// initializeMap();
 		// setMarker(55.3,9.9,"Hamburg");
 		return view;
 	}
@@ -77,6 +83,18 @@ public class MapFragment extends Fragment {
 	public void onResume() {
 		super.onResume();
 		initializeMap();
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.button_map:
+			mainActivity.getFragment(mainActivity.MAP);
+			break;
+		case R.id.button_friends:
+			mainActivity.getFragment(mainActivity.FRIENDS);
+			break;
+		}
 	}
 
 }

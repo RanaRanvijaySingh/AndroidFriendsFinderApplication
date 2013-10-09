@@ -12,6 +12,8 @@ import com.webonise.friendsfinder.webservice.FacebookService;
 public class MainActivity extends FragmentActivity {
 
 	private static final String TAG = "MainActivity";
+	public static final int MAP=0;
+	public static final int FRIENDS=1;
 	MapFragment mapFragment;
 	FriendListFragment fListFragment;
 	FragmentManager fragmentManager=getSupportFragmentManager();
@@ -46,6 +48,10 @@ public class MainActivity extends FragmentActivity {
 //		mapFragment.setMarker(latitude, longitude, name,imageUrl);
 //		Log.v(null,"switched");
 		
+		
+	}
+	public void getFragment(int intFragment)
+	{
 		
 	}
 }

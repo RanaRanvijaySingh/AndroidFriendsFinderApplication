@@ -337,7 +337,9 @@ containing a value of this type.
         public static final int ic_launcher=0x7f020020;
     }
     public static final class id {
-        public static final int action_settings=0x7f040024;
+        public static final int action_settings=0x7f040025;
+        public static final int button_friends=0x7f040008;
+        public static final int button_map=0x7f040007;
         public static final int com_facebook_login_activity_progress_bar=0x7f04000c;
         public static final int com_facebook_picker_activity_circle=0x7f04000b;
         public static final int com_facebook_picker_checkbox=0x7f04000e;
@@ -360,12 +362,11 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_profile_name=0x7f04001d;
         public static final int fragments=0x7f040009;
         public static final int friend=0x7f040020;
-        public static final int friends=0x7f040008;
         public static final int frinds_list=0x7f040023;
         public static final int hybrid=0x7f040004;
         public static final int large=0x7f040006;
         public static final int location=0x7f040021;
-        public static final int map=0x7f040007;
+        public static final int map=0x7f040024;
         public static final int none=0x7f040000;
         public static final int normal=0x7f040001;
         public static final int picker_subtitle=0x7f040019;
