@@ -9,8 +9,10 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.facebook.Response;
@@ -29,7 +31,7 @@ public class FriendListFragment extends Fragment {
 
 	@SuppressLint("ValidFragment")
 	public FriendListFragment(MainActivity mainActivity) {
-		this.mainActivity=mainActivity;
+		this.mainActivity = mainActivity;
 	}
 
 	@Override
@@ -83,5 +85,4 @@ public class FriendListFragment extends Fragment {
 				friendsList);
 		listView.setAdapter(adapter);
 	}
-
 }

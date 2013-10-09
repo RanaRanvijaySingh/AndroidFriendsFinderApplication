@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 @SuppressLint("ValidFragment")
-public class MapFragment extends Fragment implements OnClickListener {
+public class MapFragment extends Fragment {
 	private GoogleMap googleMap;
 	SupportMapFragment supportMapFragment;
 	MainActivity mainActivity;
@@ -33,10 +33,6 @@ public class MapFragment extends Fragment implements OnClickListener {
 
 		mainActivity = (MainActivity) this.getActivity();
 		View view = inflater.inflate(R.layout.map_fragment, container, false);
-		Button buttonMap = (Button) view.findViewById(R.id.button_map);
-		Button buttonFriends = (Button) view.findViewById(R.id.button_friends);
-		buttonMap.setOnClickListener(this);
-		buttonMap.setOnClickListener(this);
 
 		Log.v(null, "in the map fragment");
 		// initializeMap();
@@ -84,17 +80,4 @@ public class MapFragment extends Fragment implements OnClickListener {
 		super.onResume();
 		initializeMap();
 	}
-
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.button_map:
-			mainActivity.getFragment(mainActivity.MAP);
-			break;
-		case R.id.button_friends:
-			mainActivity.getFragment(mainActivity.FRIENDS);
-			break;
-		}
-	}
-
 }
