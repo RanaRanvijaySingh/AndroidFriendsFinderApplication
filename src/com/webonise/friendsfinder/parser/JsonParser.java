@@ -15,28 +15,17 @@ import com.webonise.friendsfinder.model.FriendModel;
 
 public class JsonParser {
 
-	private static final String TAG="JsonParser";
+	private static final String TAG = "JsonParser";
+
 	public List<FriendModel> parseJsonObject(Response response) {
 
 		List<FriendModel> friendModelList = new ArrayList<FriendModel>();
-
-		// String stringArray[] = null;
-		//
-		// Log.v("json", response.getGraphObjectAs(new GraphObject));
 		GraphObject graphObject = response.getGraphObject();
 		JSONObject jsonObject = graphObject.getInnerJSONObject();
-		
-	//	JSONObject jsonObject = new JSONObject();
-		
-
+		// JSONObject jsonObject = new JSONObject();
 		try {
 			JSONArray jsonArray = jsonObject.getJSONArray("data");
-			// stringArray = new String[jsonArray.length()];
 			for (int i = 0; i < jsonArray.length(); i++) {
-				// stringArray[i] = new String();
-				// stringArray[i] =
-				// jsonArray.getJSONObject(i).getString("name");
-
 				FriendModel friendModel = new FriendModel();
 				friendModel.setName(jsonArray.getJSONObject(i)
 						.getString("name"));
@@ -46,19 +35,16 @@ public class JsonParser {
 					JSONObject currentLocation = jsonArray.getJSONObject(i)
 							.getJSONObject("current_location");
 					friendModel.setState(currentLocation.getString("state"));
-					friendModel.setLongitude(currentLocation.getDouble("longitude"));
-					friendModel.setLatitude(currentLocation.getDouble("latitude"));
+					friendModel.setLongitude(currentLocation
+							.getDouble("longitude"));
+					friendModel.setLatitude(currentLocation
+							.getDouble("latitude"));
 					friendModel.setLocation(currentLocation.getString("city"));
 				} catch (Exception currentLocation) {
 				}
-				// Log.v("json", i+" "+friendModel.getName());
 				friendModelList.add(friendModel);
 			}
-			// String jsonName=jsonArray.getJSONObject(0).getString("name");
-
-			// Log.v("json", jsonName);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return friendModelList;

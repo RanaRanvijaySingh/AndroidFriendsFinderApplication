@@ -22,14 +22,13 @@ import com.webonise.friendsfinder.adapter.FriendListAdapter;
 import com.webonise.friendsfinder.model.FriendModel;
 import com.webonise.friendsfinder.parser.JsonParser;
 import com.webonise.friendsfinder.task.RequestServiceTask;
+import com.webonise.friendsfinder.webservice.FacebookService;
 
 @SuppressLint({ "ValidFragment", "ResourceAsColor" })
 public class FriendListFragment extends FragmentActivity implements
 		OnClickListener {
 
 	private static final String TAG = GetField.class.getName();
-
-	MainActivity mainActivity;
 	String stringArrayFriends[];
 	List<FriendModel> friendsList;
 	ListView listView;
@@ -39,8 +38,10 @@ public class FriendListFragment extends FragmentActivity implements
 		super.onCreate(arg0);
 		setContentView(R.layout.friend_list_fragment);
 		initializeComponents();
+		FacebookService mService=FacebookService.getIntance();
 		listView = (ListView) findViewById(R.id.frinds_list);
-		Log.v(TAG, " ");
+		mService.getFriendsList(this);
+		Log.v(TAG, "__friends__");
 	}
 
 	@SuppressLint("ResourceAsColor")
@@ -98,17 +99,15 @@ public class FriendListFragment extends FragmentActivity implements
 		Response mResponse = response;
 		friendsList = new ArrayList<FriendModel>();
 		JsonParser jsonParser = new JsonParser();
-		// friendsList = new ArrayList<String>();
-		// friendsList = jsonParser.parseJsonObject(mResponse);
-		Log.v("list", friendsList.get(0).getName());
+		Log.v("list", response.toString());
+		friendsList = new ArrayList<FriendModel>();
+		friendsList = jsonParser.parseJsonObject(mResponse);
 		callForAdapter();
 
 	}
 
 	private void callForAdapter() {
-
-		FriendListAdapter adapter = new FriendListAdapter(mainActivity,
-				friendsList);
+		FriendListAdapter adapter = new FriendListAdapter(this,friendsList);
 		listView.setAdapter(adapter);
 	}
 }

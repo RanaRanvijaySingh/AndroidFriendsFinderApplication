@@ -22,17 +22,31 @@ import com.google.android.gms.maps.model.MarkerOptions;
 @SuppressLint("ValidFragment")
 public class MapFragment extends FragmentActivity implements OnClickListener {
 
-	// private GoogleMap googleMap;
+	private GoogleMap googleMap;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.map_fragment);
 		initializeComponents();
-		// initializeMap();
+		initializeMap();
 	}
 
-	@SuppressLint("ResourceAsColor")
+	private void initializeMap() {
+		if (googleMap == null) {
+			SupportMapFragment supportMapFragment = ((SupportMapFragment) getSupportFragmentManager()
+					.findFragmentById(R.id.map));
+			googleMap = supportMapFragment.getMap();
+
+			if (googleMap == null) {
+				Toast.makeText(getApplicationContext(),
+						"Sorry the map is not initialize", Toast.LENGTH_LONG)
+						.show();
+			}
+		}
+
+	}
+
 	private void initializeComponents() {
 		Button buttonFriends = (Button) findViewById(R.id.button_friends);
 		Button buttonMap = (Button) findViewById(R.id.button_map);
@@ -46,18 +60,6 @@ public class MapFragment extends FragmentActivity implements OnClickListener {
 		Intent intent = new Intent(this, FriendListFragment.class);
 		startActivity(intent);
 	}
-	// private void initializeMap() {
-	// if (googleMap == null) {
-	// SupportMapFragment supportMapFragment =(SupportMapFragment)
-	// getSupportFragmentManager().findFragmentById(R.id.map);
-	// googleMap = supportMapFragment.getMap();
-	// if (googleMap == null) {
-	// Toast.makeText(this, "Sorry the map is not initialize",
-	// Toast.LENGTH_LONG).show();
-	// }
-	// }
-	// Log.v(null, "Starting Google Map");
-	// }
 
 	//
 	// void setMarker(double latitude, double longitude, String name,

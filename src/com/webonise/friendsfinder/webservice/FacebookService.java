@@ -24,9 +24,9 @@ public class FacebookService {
 		return service;
 	}
 
-	public void createFacebookSession(MainActivity mActivity) {
+	public void createFacebookSession(MainActivity mainActivity) {
 
-		Session.openActiveSession(mActivity, true,
+		Session.openActiveSession(mainActivity, true,
 				new Session.StatusCallback() {
 
 					// callback when session changes state
@@ -46,7 +46,7 @@ public class FacebookService {
 										@Override
 										public void onCompleted(GraphUser user,
 												Response response) {
-											Log.v("", "creating session");
+											Log.v("", "session created");
 											// getFriendsList();
 										}
 
@@ -59,14 +59,10 @@ public class FacebookService {
 
 	public void getFriendsList(final FriendListFragment context) {
 
-		// String fqlQuery =
-		// "select uid, name, pic_square from user where uid in (select uid2 from friend where uid1 = me())";
-
-		// String fqlQuery =
+		// String fqlQuery ="select uid, name, pic_square from user where uid in (select uid2 from friend where uid1 = me())";
 		// "SELECT current_location FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me())";
-		String fqlQuery = "select name ,pic_square,current_location   from user where uid in (select uid2 from friend where uid1 = me())";
-		// String fqlQuery
-		// ="me?fields=id,name,first_name,last_name,email,picture.width(150).height(150),username,location,friends.fields(name,picture.width(150).height(150),username,location)";
+		String fqlQuery = "select name,pic_square,current_location from user where uid in (select uid2 from friend where uid1 = me())";
+		// String fqlQuery="me?fields=id,name,first_name,last_name,email,picture.width(150).height(150),username,location,friends.fields(name,picture.width(150).height(150),username,location)";
 		Bundle bundle = new Bundle();
 		bundle.putString("q", fqlQuery);
 
@@ -75,8 +71,6 @@ public class FacebookService {
 				new Request.Callback() {
 
 					public void onCompleted(Response response) {
-
-						Log.i(null, "Got results: " + response.toString());
 						context.onFriendsListResult(response);
 					}
 				});

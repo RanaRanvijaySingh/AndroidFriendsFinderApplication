@@ -13,29 +13,21 @@ import android.widget.Button;
 import com.facebook.Session;
 import com.webonise.friendsfinder.webservice.FacebookService;
 
-public class MainActivity extends FragmentActivity{
+public class MainActivity extends FragmentActivity {
 
 	private static final String TAG = "MainActivity";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.header_bar);
 
+		setContentView(R.layout.map_fragment);
 		FacebookService mService = FacebookService.getIntance();
 		mService.createFacebookSession(this);
-
 		Intent intent = new Intent(this, MapFragment.class);
 		startActivity(intent);
 
 	}
-
-//	private void initializeComponents() {
-//		Button buttonMap = (Button) findViewById(R.id.button_map);
-//		Button buttonFriends = (Button) findViewById(R.id.button_friends);
-//		buttonMap.setOnClickListener(this);
-//		buttonFriends.setOnClickListener(this);
-//	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -57,27 +49,15 @@ public class MainActivity extends FragmentActivity{
 	public void getFragment(int intFragment) {
 		Log.v(null, "Clicked");
 		if (intFragment == 0) {
-//			FragmentTransaction transaction = fragmentManager
-//					.beginTransaction();
-//			transaction.replace(R.id.fragments, mapFragment);
-//			transaction.commit();
+			// FragmentTransaction transaction = fragmentManager
+			// .beginTransaction();
+			// transaction.replace(R.id.fragments, mapFragment);
+			// transaction.commit();
 		} else {
-//			FragmentTransaction transaction = fragmentManager
-//					.beginTransaction();
-//			transaction.replace(R.id.fragments, fListFragment);
-//			transaction.commit();
+			// FragmentTransaction transaction = fragmentManager
+			// .beginTransaction();
+			// transaction.replace(R.id.fragments, fListFragment);
+			// transaction.commit();
 		}
 	}
-
-//	@Override
-//	public void onClick(View v) {
-//		switch (v.getId()) {
-//		case R.id.button_map:
-//			getFragment(MAP);
-//			break;
-//		case R.id.button_friends:
-//			getFragment(FRIENDS);
-//			break;
-//		}
-//	}
 }

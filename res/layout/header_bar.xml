@@ -7,7 +7,7 @@
     <Button
         android:id="@+id/button_map"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_weight="0.5"
         android:background="@drawable/item_pressed"
         android:text="@string/map" />
@@ -15,7 +15,7 @@
     <Button
         android:id="@+id/button_friends"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_weight="0.5"
         android:background="@drawable/item_pressed"
         android:text="@string/friends" />

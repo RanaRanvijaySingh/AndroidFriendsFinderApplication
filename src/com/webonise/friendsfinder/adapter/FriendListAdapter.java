@@ -30,8 +30,8 @@ public class FriendListAdapter extends BaseAdapter {
 		this.mContext = mContext;
 		this.friendsList = new ArrayList<FriendModel>();
 		this.friendsList = friendsList;
-//		for (int i = 0; i < this.friendsList.size(); i++)
-//			Log.e(null, friendsList.get(i).getName());
+		for (int i = 0; i < this.friendsList.size(); i+=50)
+			Log.v(null, friendsList.get(i).getName());
 
 	}
 
@@ -60,18 +60,19 @@ public class FriendListAdapter extends BaseAdapter {
 
 		TextView name = (TextView) convertView.findViewById(R.id.friend);
 		name.setText(friendsList.get(position).getName());
+		Log.v("list",friendsList.get(position).getName());
 		
-		TextView location = (TextView) convertView.findViewById(R.id.location);
-		location.setText(friendsList.get(position).getLocation());
-		
-		TextView state = (TextView) convertView.findViewById(R.id.state);
-		state.setText(" , "+ friendsList.get(position).getState());
-		
-		
-		ImageLoaderTask iLoaderTask=new ImageLoaderTask(this,friendsList.get(position));
-		iLoaderTask.execute();
-		ImageView profilImageView=(ImageView)convertView.findViewById(R.id.profile_pic);
-		profilImageView.setImageBitmap(profilePic);
+//		TextView location = (TextView) convertView.findViewById(R.id.location);
+//		location.setText(friendsList.get(position).getLocation());
+//		
+//		TextView state = (TextView) convertView.findViewById(R.id.state);
+//		state.setText(" , "+ friendsList.get(position).getState());
+//		
+//		
+//		ImageLoaderTask iLoaderTask=new ImageLoaderTask(this,friendsList.get(position));
+//		iLoaderTask.execute();
+//		ImageView profilImageView=(ImageView)convertView.findViewById(R.id.profile_pic);
+//		profilImageView.setImageBitmap(profilePic);
 
 		return convertView;
 	}
