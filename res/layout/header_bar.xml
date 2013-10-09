@@ -9,6 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
+        android:background="@drawable/item_pressed"
         android:text="@string/map" />
 
     <Button
@@ -16,6 +17,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
+        android:background="@drawable/item_pressed"
         android:text="@string/friends" />
 
 </LinearLayout>

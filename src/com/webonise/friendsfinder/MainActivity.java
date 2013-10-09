@@ -13,14 +13,9 @@ import android.widget.Button;
 import com.facebook.Session;
 import com.webonise.friendsfinder.webservice.FacebookService;
 
-public class MainActivity extends FragmentActivity implements OnClickListener {
+public class MainActivity extends FragmentActivity{
 
 	private static final String TAG = "MainActivity";
-	public static final int MAP = 0;
-	public static final int FRIENDS = 1;
-	MapFragment mapFragment;
-	FriendListFragment fListFragment;
-	FragmentManager fragmentManager = getSupportFragmentManager();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,19 +25,17 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		FacebookService mService = FacebookService.getIntance();
 		mService.createFacebookSession(this);
 
-		initializeComponents();
-
 		Intent intent = new Intent(this, MapFragment.class);
 		startActivity(intent);
 
 	}
 
-	private void initializeComponents() {
-		Button buttonMap = (Button) findViewById(R.id.button_map);
-		Button buttonFriends = (Button) findViewById(R.id.button_friends);
-		buttonMap.setOnClickListener(this);
-		buttonFriends.setOnClickListener(this);
-	}
+//	private void initializeComponents() {
+//		Button buttonMap = (Button) findViewById(R.id.button_map);
+//		Button buttonFriends = (Button) findViewById(R.id.button_friends);
+//		buttonMap.setOnClickListener(this);
+//		buttonFriends.setOnClickListener(this);
+//	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -76,15 +69,15 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		}
 	}
 
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.button_map:
-			getFragment(MAP);
-			break;
-		case R.id.button_friends:
-			getFragment(FRIENDS);
-			break;
-		}
-	}
+//	@Override
+//	public void onClick(View v) {
+//		switch (v.getId()) {
+//		case R.id.button_map:
+//			getFragment(MAP);
+//			break;
+//		case R.id.button_friends:
+//			getFragment(FRIENDS);
+//			break;
+//		}
+//	}
 }

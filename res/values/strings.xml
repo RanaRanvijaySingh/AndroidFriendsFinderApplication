@@ -8,4 +8,7 @@
     <string name="map">Map</string>
     <string name="friends">Friends</string>
 
+    <color name="gray">#aa8</color>
+    <color name="green">#1f1</color>
+
 </resources>
