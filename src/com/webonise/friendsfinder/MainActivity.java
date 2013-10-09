@@ -13,6 +13,8 @@ public class MainActivity extends FragmentActivity {
 
 	private static final String TAG = "MainActivity";
 	FragmentTabHost mTabHost;
+	MapFragment mapFragment;
+	FriendListFragment fListFragment;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,7 +29,7 @@ public class MainActivity extends FragmentActivity {
 	private void setTabContent() {
 		
 		mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
-		mTabHost.setup(this, getSupportFragmentManager(), R.id.tabFrameLayout);
+		mTabHost.setup(this, getSupportFragmentManager(), R.id.fragments);
 
 		mTabHost.addTab(mTabHost.newTabSpec("map").setIndicator("Map"),
 				MapFragment.class, null);
