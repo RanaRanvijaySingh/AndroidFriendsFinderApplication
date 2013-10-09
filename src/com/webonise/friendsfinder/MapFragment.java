@@ -1,9 +1,9 @@
 package com.webonise.friendsfinder;
 
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,19 +11,16 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.webonise.friendsfinder.helper.UrlImageHandler;
 
 @SuppressLint("ValidFragment")
 public class MapFragment extends Fragment {
 	private GoogleMap googleMap;
 	SupportMapFragment supportMapFragment;
 	MainActivity mainActivity;
-	View view;
-
+	
 	public MapFragment(MainActivity mainActivity) {
 		this.mainActivity = mainActivity;
 	}
@@ -33,13 +30,10 @@ public class MapFragment extends Fragment {
 			Bundle savedInstanceState) {
 
 		mainActivity = (MainActivity) this.getActivity();
-		view = null;
-		if (view == null) {
-			container.removeAllViews();
-			view = inflater.inflate(R.layout.map_fragment, container, false);
-		}
+		View view=inflater.inflate(R.layout.map_fragment, container,false);
 
-		initializeMap();
+		Log.v(null,"in the map fragment");
+		//initializeMap();
 		// setMarker(55.3,9.9,"Hamburg");
 		return view;
 	}
