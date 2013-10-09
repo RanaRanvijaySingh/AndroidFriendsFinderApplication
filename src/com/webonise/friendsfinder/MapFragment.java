@@ -3,6 +3,7 @@ package com.webonise.friendsfinder;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +19,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 @SuppressLint("ValidFragment")
-public class MapFragment extends Fragment {
-	private GoogleMap googleMap;
-	SupportMapFragment supportMapFragment;
+public class MapFragment extends FragmentActivity {
+
+	
 	MainActivity mainActivity;
+	private GoogleMap googleMap;
 
 	public MapFragment(MainActivity mainActivity) {
 		this.mainActivity = mainActivity;
@@ -35,37 +37,33 @@ public class MapFragment extends Fragment {
 		View view = inflater.inflate(R.layout.map_fragment, container, false);
 
 		Log.v(null, "in the map fragment");
-		// initializeMap();
+		initializeMap();
 		// setMarker(55.3,9.9,"Hamburg");
 		return view;
 	}
-
-	void setMarker(double latitude, double longitude, String name,
-			String imageUrl) {
-		// initializeMap();
-		LatLng position = new LatLng(latitude, longitude);
-
-		// UrlImageHandler uImageHandler = UrlImageHandler.getInstance();
-		// Bitmap profilePic = uImageHandler.getUrlImage(imageUrl);
-
-		if (googleMap == null) {
-			initializeMap();
-		}
-		Marker location = googleMap.addMarker(new MarkerOptions().visible(true)
-				.position(position).snippet(name));
-
-		// Marker kiel = googleMap.addMarker(new MarkerOptions()
-		// .position(KIEL)
-		// .title("Kiel")
-		// .snippet("Keil is cool")
-		// .icon(BitmapDescriptorFactory
-		// .fromResource(R.drawable.ic_launcher)));
-
-	}
+//
+//	void setMarker(double latitude, double longitude, String name,
+//			String imageUrl) {
+//		// initializeMap();
+//		LatLng position = new LatLng(latitude, longitude);
+//		// UrlImageHandler uImageHandler = UrlImageHandler.getInstance();
+//		// Bitmap profilePic = uImageHandler.getUrlImage(imageUrl);
+//		if (googleMap == null) {
+//			initializeMap();
+//		}
+//		Marker location = googleMap.addMarker(new MarkerOptions().visible(true)
+//				.position(position).snippet(name));
+//		// Marker kiel = googleMap.addMarker(new MarkerOptions()
+//		// .position(KIEL)
+//		// .title("Kiel")
+//		// .snippet("Keil is cool")
+//		// .icon(BitmapDescriptorFactory
+//		// .fromResource(R.drawable.ic_launcher)));
+//	}
 
 	private void initializeMap() {
 		if (googleMap == null) {
-			supportMapFragment = ((SupportMapFragment) getFragmentManager()
+			SupportMapFragment supportMapFragment = ((SupportMapFragment) getFragmentManager()
 					.findFragmentById(R.id.map));
 			googleMap = supportMapFragment.getMap();
 			if (googleMap == null) {
@@ -73,11 +71,13 @@ public class MapFragment extends Fragment {
 						Toast.LENGTH_LONG).show();
 			}
 		}
-
+		Log.v(null, "Starting Google Map");
 	}
 
-	public void onResume() {
-		super.onResume();
-		initializeMap();
-	}
+	// @Override
+	// public void onResume() {
+	//
+	// super.onResume();
+	// initializeMap();
+	// }
 }

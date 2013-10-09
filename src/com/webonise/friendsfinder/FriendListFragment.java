@@ -1,5 +1,6 @@
 package com.webonise.friendsfinder;
 
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,25 +10,24 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.facebook.Response;
 import com.webonise.friendsfinder.adapter.FriendListAdapter;
 import com.webonise.friendsfinder.model.FriendModel;
 import com.webonise.friendsfinder.parser.JsonParser;
-import com.webonise.friendsfinder.webservice.FacebookService;
+import com.webonise.friendsfinder.task.RequestServiceTask;
 
 @SuppressLint("ValidFragment")
 public class FriendListFragment extends Fragment {
+
+	private static final String TAG = GetField.class.getName();
+
 	MainActivity mainActivity;
 	String stringArrayFriends[];
-	ListView listView;
 	List<FriendModel> friendsList;
-	private static String TAG = "FriendListFragment";
+	ListView listView;
 
 	@SuppressLint("ValidFragment")
 	public FriendListFragment(MainActivity mainActivity) {
@@ -42,29 +42,31 @@ public class FriendListFragment extends Fragment {
 				false);
 		listView = (ListView) view.findViewById(R.id.frinds_list);
 
-		// new RequestServiceTask().execute();
+		// new RequestServiceTask().execute(); //not using
 
-		FacebookService mService = FacebookService.getIntance();
-		mService.getFriendsList(this);
+		// FacebookService mService = FacebookService.getIntance();
+		// mService.getFriendsList(this);
 
-		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1,
-					int position, long arg3) {
-
-				FriendModel friend = new FriendModel();
-				friend = friendsList.get(position);
-				Log.v("clicked", friend.getName());
-				Log.v("clicked", friend.getLocation());
-				Log.v("clicked", friend.getState());
-				Log.v("clicked", "" + friend.getLatitude());
-				Log.v("clicked", "" + friend.getLongitude());
-
-				mainActivity.getLocationInMap(friend.getLongitude(),
-						friend.getLatitude(), friend.getName(),
-						friend.getImageUrl());
-			}
-		});
+		// listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+		// {
+		// @Override
+		// public void onItemClick(AdapterView<?> arg0, View arg1,
+		// int position, long arg3) {
+		//
+		// FriendModel friend = new FriendModel();
+		// friend = friendsList.get(position);
+		// Log.v("clicked", friend.getName());
+		// Log.v("clicked", friend.getLocation());
+		// Log.v("clicked", friend.getState());
+		// Log.v("clicked", "" + friend.getLatitude());
+		// Log.v("clicked", "" + friend.getLongitude());
+		//
+		// mainActivity.getLocationInMap(friend.getLongitude(),
+		// friend.getLatitude(), friend.getName(),
+		// friend.getImageUrl());
+		// }
+		// });
+		Log.v(TAG, "in the friends list fragment");
 		return view;
 	}
 
@@ -73,8 +75,8 @@ public class FriendListFragment extends Fragment {
 		friendsList = new ArrayList<FriendModel>();
 		JsonParser jsonParser = new JsonParser();
 		// friendsList = new ArrayList<String>();
-		friendsList = jsonParser.parseJsonObject(mResponse);
-		// Log.v("list", friendsList.get(0).getName());
+		// friendsList = jsonParser.parseJsonObject(mResponse);
+		Log.v("list", friendsList.get(0).getName());
 		callForAdapter();
 
 	}

@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.facebook.Session;
+import com.webonise.friendsfinder.webservice.FacebookService;
 
 public class MainActivity extends FragmentActivity implements OnClickListener {
 
@@ -26,6 +27,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		FacebookService mService = FacebookService.getIntance();
+		mService.createFacebookSession(this);
+
 		initializeComponents();
 
 		FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -34,8 +38,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		transaction.add(R.id.fragments, mapFragment);
 		transaction.commit();
 
-		// FacebookService mService =FacebookService.getIntance();
-		// mService.createFacebookSession(this);
 	}
 
 	private void initializeComponents() {
@@ -64,6 +66,17 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 
 	public void getFragment(int intFragment) {
 		Log.v(null, "Clicked");
+		if (intFragment == 0) {
+			FragmentTransaction transaction = fragmentManager
+					.beginTransaction();
+			transaction.replace(R.id.fragments, mapFragment);
+			transaction.commit();
+		} else {
+			FragmentTransaction transaction = fragmentManager
+					.beginTransaction();
+			transaction.replace(R.id.fragments, fListFragment);
+			transaction.commit();
+		}
 	}
 
 	@Override

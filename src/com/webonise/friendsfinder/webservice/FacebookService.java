@@ -14,19 +14,18 @@ import com.webonise.friendsfinder.MainActivity;
 
 public class FacebookService {
 
-	private static FacebookService service=new FacebookService();
-	private FacebookService()
-	{
-	
+	private static FacebookService service = new FacebookService();
+
+	private FacebookService() {
+
 	}
-	public static FacebookService getIntance()
-	{
+
+	public static FacebookService getIntance() {
 		return service;
 	}
 
-
 	public void createFacebookSession(MainActivity mActivity) {
-		
+
 		Session.openActiveSession(mActivity, true,
 				new Session.StatusCallback() {
 
@@ -47,8 +46,8 @@ public class FacebookService {
 										@Override
 										public void onCompleted(GraphUser user,
 												Response response) {
-											Log.v("","creating session");
-											//getFriendsList();
+											Log.v("", "creating session");
+											// getFriendsList();
 										}
 
 									});
@@ -59,7 +58,7 @@ public class FacebookService {
 	}
 
 	public void getFriendsList(final FriendListFragment context) {
-		
+
 		// String fqlQuery =
 		// "select uid, name, pic_square from user where uid in (select uid2 from friend where uid1 = me())";
 
@@ -70,21 +69,20 @@ public class FacebookService {
 		// ="me?fields=id,name,first_name,last_name,email,picture.width(150).height(150),username,location,friends.fields(name,picture.width(150).height(150),username,location)";
 		Bundle bundle = new Bundle();
 		bundle.putString("q", fqlQuery);
-		
+
 		Session session = Session.getActiveSession();
 		Request request = new Request(session, "/fql", bundle, HttpMethod.GET,
 				new Request.Callback() {
-			
+
 					public void onCompleted(Response response) {
-					
+
 						Log.i(null, "Got results: " + response.toString());
 						context.onFriendsListResult(response);
 					}
 				});
-		Log.i("", " =============="+request.toString());
+		Log.i("", " ==============" + request.toString());
 		Request.executeBatchAsync(request);
-		
-	
+
 	}
-	
+
 }
