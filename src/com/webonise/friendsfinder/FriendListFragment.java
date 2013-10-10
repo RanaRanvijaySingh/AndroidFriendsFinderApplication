@@ -14,7 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.facebook.Response;
@@ -36,11 +38,31 @@ public class FriendListFragment extends FragmentActivity implements
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		final Intent intent = new Intent(this, MapFragment.class);
 		setContentView(R.layout.friend_list_fragment);
 		initializeComponents();
-		FacebookService mService=FacebookService.getIntance();
+		FacebookService mService = FacebookService.getIntance();
 		listView = (ListView) findViewById(R.id.frinds_list);
 		mService.getFriendsList(this);
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+				FriendModel friend = new FriendModel();
+				friend = friendsList.get(position);
+				Log.v("clicked", friend.getName());
+				Log.v("clicked", friend.getLocation());
+				Log.v("clicked", friend.getState());
+				Log.v("clicked", "" + friend.getLatitude());
+				Log.v("clicked", "" + friend.getLongitude());
+				intent.putExtra("name", friend.getName());
+				intent.putExtra("longitude", friend.getLongitude());
+				intent.putExtra("latitude", friend.getLatitude());
+				intent.putExtra("location", friend.getLocation());
+				intent.putExtra("imageUrl", friend.getImageUrl());
+				startActivity(intent);
+			}
+		});
 		Log.v(TAG, "__friends__");
 	}
 
@@ -106,7 +128,7 @@ public class FriendListFragment extends FragmentActivity implements
 	}
 
 	private void callForAdapter() {
-		FriendListAdapter adapter = new FriendListAdapter(this,friendsList);
+		FriendListAdapter adapter = new FriendListAdapter(this, friendsList);
 		listView.setAdapter(adapter);
 	}
 }

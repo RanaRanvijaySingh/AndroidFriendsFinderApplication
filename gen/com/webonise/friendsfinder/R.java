@@ -340,9 +340,9 @@ containing a value of this type.
         public static final int item_pressed=0x7f020021;
     }
     public static final class id {
-        public static final int action_settings=0x7f040025;
-        public static final int button_friends=0x7f040023;
-        public static final int button_map=0x7f040022;
+        public static final int action_settings=0x7f040027;
+        public static final int button_friends=0x7f040024;
+        public static final int button_map=0x7f040023;
         public static final int com_facebook_login_activity_progress_bar=0x7f040009;
         public static final int com_facebook_picker_activity_circle=0x7f040008;
         public static final int com_facebook_picker_checkbox=0x7f04000b;
@@ -363,20 +363,22 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_login_button=0x7f04001b;
         public static final int com_facebook_usersettingsfragment_logo_image=0x7f040019;
         public static final int com_facebook_usersettingsfragment_profile_name=0x7f04001a;
-        public static final int friend=0x7f04001d;
-        public static final int frinds_list=0x7f040021;
-        public static final int header=0x7f040020;
+        public static final int friend=0x7f04001e;
+        public static final int friend_pic=0x7f04001c;
+        public static final int frinds_list=0x7f040022;
+        public static final int header=0x7f040021;
         public static final int hybrid=0x7f040004;
         public static final int large=0x7f040006;
-        public static final int location=0x7f04001e;
-        public static final int map=0x7f040024;
+        public static final int location=0x7f04001f;
+        public static final int map=0x7f040026;
+        public static final int map_option=0x7f040025;
         public static final int none=0x7f040000;
         public static final int normal=0x7f040001;
         public static final int picker_subtitle=0x7f040016;
-        public static final int profile_pic=0x7f04001c;
+        public static final int profile_pic=0x7f04001d;
         public static final int satellite=0x7f040002;
         public static final int small=0x7f040005;
-        public static final int state=0x7f04001f;
+        public static final int state=0x7f040020;
         public static final int terrain=0x7f040003;
     }
     public static final class layout {
@@ -394,10 +396,12 @@ containing a value of this type.
         public static final int com_facebook_placepickerfragment_list_row=0x7f03000b;
         public static final int com_facebook_search_bar_layout=0x7f03000c;
         public static final int com_facebook_usersettingsfragment=0x7f03000d;
-        public static final int friend_list_element=0x7f03000e;
-        public static final int friend_list_fragment=0x7f03000f;
-        public static final int header_bar=0x7f030010;
-        public static final int map_fragment=0x7f030011;
+        public static final int friend_info=0x7f03000e;
+        public static final int friend_list_element=0x7f03000f;
+        public static final int friend_list_fragment=0x7f030010;
+        public static final int header_bar=0x7f030011;
+        public static final int map_fragment=0x7f030012;
+        public static final int map_option=0x7f030013;
     }
     public static final class menu {
         public static final int main=0x7f090000;
@@ -495,7 +499,11 @@ containing a value of this type.
         public static final int common_signin_button_text_long=0x7f05000d;
         public static final int friends=0x7f05002f;
         public static final int hello_world=0x7f05002c;
+        public static final int hybrid=0x7f050031;
         public static final int map=0x7f05002e;
+        public static final int normal=0x7f050030;
+        public static final int satellite=0x7f050033;
+        public static final int terrain=0x7f050032;
     }
     public static final class style {
         /** 

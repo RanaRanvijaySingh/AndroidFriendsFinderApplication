@@ -28,32 +28,24 @@ public class JsonParser {
 
 				JSONObject currentLocations = jsonArray.getJSONObject(i);
 				try {
-					if (currentLocations.getJSONObject("current_location") != null) {
-						JSONObject currentLocation = currentLocations.getJSONObject("current_location");
-						FriendModel friendModel = new FriendModel();
-						friendModel.setName(jsonArray.getJSONObject(i).getString(
-								"name"));
-						friendModel.setImageUrl(jsonArray.getJSONObject(i)
-								.getString("pic_square"));
+					JSONObject currentLocation = currentLocations
+							.getJSONObject("current_location");
+					FriendModel friendModel = new FriendModel();
+					friendModel.setName(jsonArray.getJSONObject(i).getString(
+							"name"));
+					friendModel.setImageUrl(jsonArray.getJSONObject(i)
+							.getString("pic_square"));
 
-						friendModel.setState(currentLocation.getString("state"));
-						friendModel.setLongitude(currentLocation
-								.getDouble("longitude"));
-						friendModel.setLatitude(currentLocation
-								.getDouble("latitude"));
-						friendModel.setLocation(currentLocation.getString("city"));
-						friendModelList.add(friendModel);
-
-						Log.v(null, friendModel.toString());
-//						Log.v(null, friendModelList.get(i).getLocation());
-//						Log.v(null, friendModelList.get(i).getState());
-//						Log.v(null, friendModelList.get(i).getLatitude() + "");
-//						Log.v(null, friendModelList.get(i).getLongitude() + "");
-					} else {
-						Log.v(TAG, "current location is null");
-					}
+					friendModel.setState(currentLocation.getString("state"));
+					friendModel.setLongitude(currentLocation
+							.getDouble("longitude"));
+					friendModel.setLatitude(currentLocation
+							.getDouble("latitude"));
+					friendModel.setLocation(currentLocation.getString("city"));
+					friendModelList.add(friendModel);
 				} catch (JSONException e) {
-					Log.v(TAG, "Catch -------->>>>>>>>>>>>>>> current location is null");
+					Log.v(TAG,
+							"Catch -------->>>>>>>>>>>>>>> current location is null");
 				}
 			}
 		} catch (JSONException e) {

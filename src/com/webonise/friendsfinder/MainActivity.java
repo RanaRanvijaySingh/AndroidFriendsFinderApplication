@@ -20,6 +20,7 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+<<<<<<< HEAD
 
 		setContentView(R.layout.map_fragment);
 		FacebookService mService = FacebookService.getIntance();
@@ -27,6 +28,39 @@ public class MainActivity extends FragmentActivity {
 		Intent intent = new Intent(this, MapFragment.class);
 		startActivity(intent);
 
+=======
+		setContentView(R.layout.activity_main);
+
+		// start Facebook Login
+		Session.openActiveSession(this, true, new Session.StatusCallback() {
+
+			// callback when session changes state
+			@Override
+			public void call(Session session, SessionState state,
+					Exception exception) {
+				if (session.isOpened()) {
+
+					// make request to the /me API
+					Request.executeMeRequestAsync(session,
+							new Request.GraphUserCallback() {
+
+								// callback after Graph API response with user
+								// object
+								@Override
+								public void onCompleted(GraphUser user,
+										Response response) {
+									if (user != null) {
+										TextView textViewWelcome = (TextView) findViewById(R.id.welcome);
+										textViewWelcome.setText("Hello "
+												+ user.getName() + "!");
+										//this is now modified
+									}
+								}
+							});
+				}
+			}
+		});
+>>>>>>> e7ea35d54fd06173389dfad89da9b58cca44ead0
 	}
 
 	@Override
