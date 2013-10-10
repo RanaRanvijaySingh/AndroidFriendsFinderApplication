@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.internal.p;
+import com.webonise.friendsfinder.FriendListFragment;
 import com.webonise.friendsfinder.R;
 import com.webonise.friendsfinder.helper.UrlImageHandler;
 import com.webonise.friendsfinder.model.FriendModel;
@@ -21,12 +22,12 @@ import com.webonise.friendsfinder.task.ImageLoaderTask;
 
 public class FriendListAdapter extends BaseAdapter {
 
-	Context mContext;
+	FriendListFragment  mContext;
 	Bitmap profilePic;
 	
 	private List<FriendModel> friendsList;
 
-	public FriendListAdapter(Context mContext, List<FriendModel> friendsList) {
+	public FriendListAdapter(FriendListFragment mContext, List<FriendModel> friendsList) {
 		this.mContext = mContext;
 		this.friendsList = new ArrayList<FriendModel>();
 		this.friendsList = friendsList;
@@ -64,10 +65,11 @@ public class FriendListAdapter extends BaseAdapter {
 		
 //		TextView location = (TextView) convertView.findViewById(R.id.location);
 //		location.setText(friendsList.get(position).getLocation());
+//		Log.v("list",friendsList.get(position).getLocation());
 //		
 //		TextView state = (TextView) convertView.findViewById(R.id.state);
 //		state.setText(" , "+ friendsList.get(position).getState());
-//		
+//		Log.v("list",friendsList.get(position).getState());
 //		
 //		ImageLoaderTask iLoaderTask=new ImageLoaderTask(this,friendsList.get(position));
 //		iLoaderTask.execute();

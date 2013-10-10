@@ -7,8 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
-
 import com.facebook.Response;
 import com.facebook.model.GraphObject;
 import com.webonise.friendsfinder.model.FriendModel;
@@ -22,7 +20,6 @@ public class JsonParser {
 		List<FriendModel> friendModelList = new ArrayList<FriendModel>();
 		GraphObject graphObject = response.getGraphObject();
 		JSONObject jsonObject = graphObject.getInnerJSONObject();
-		// JSONObject jsonObject = new JSONObject();
 		try {
 			JSONArray jsonArray = jsonObject.getJSONArray("data");
 			for (int i = 0; i < jsonArray.length(); i++) {
