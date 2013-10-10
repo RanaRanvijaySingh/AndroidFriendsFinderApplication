@@ -26,7 +26,6 @@ public class ImageLoaderTask extends AsyncTask<Void, Void, Bitmap>{
 	@Override
 	protected Bitmap doInBackground(Void... params) {
 		Bitmap profilePic= urlImage.getUrlImage(friendModel.getImageUrl());
-	
 		return profilePic;
 	}
 

@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.facebook.Response;
 import com.facebook.model.GraphObject;
 import com.webonise.friendsfinder.model.FriendModel;
@@ -23,26 +25,39 @@ public class JsonParser {
 		try {
 			JSONArray jsonArray = jsonObject.getJSONArray("data");
 			for (int i = 0; i < jsonArray.length(); i++) {
-				FriendModel friendModel = new FriendModel();
-				friendModel.setName(jsonArray.getJSONObject(i)
-						.getString("name"));
-				friendModel.setImageUrl(jsonArray.getJSONObject(i).getString(
-						"pic_square"));
+
+				JSONObject currentLocations = jsonArray.getJSONObject(i);
 				try {
-					JSONObject currentLocation = jsonArray.getJSONObject(i)
-							.getJSONObject("current_location");
-					friendModel.setState(currentLocation.getString("state"));
-					friendModel.setLongitude(currentLocation
-							.getDouble("longitude"));
-					friendModel.setLatitude(currentLocation
-							.getDouble("latitude"));
-					friendModel.setLocation(currentLocation.getString("city"));
-				} catch (Exception currentLocation) {
+					if (currentLocations.getJSONObject("current_location") != null) {
+						JSONObject currentLocation = currentLocations.getJSONObject("current_location");
+						FriendModel friendModel = new FriendModel();
+						friendModel.setName(jsonArray.getJSONObject(i).getString(
+								"name"));
+						friendModel.setImageUrl(jsonArray.getJSONObject(i)
+								.getString("pic_square"));
+
+						friendModel.setState(currentLocation.getString("state"));
+						friendModel.setLongitude(currentLocation
+								.getDouble("longitude"));
+						friendModel.setLatitude(currentLocation
+								.getDouble("latitude"));
+						friendModel.setLocation(currentLocation.getString("city"));
+						friendModelList.add(friendModel);
+
+						Log.v(null, friendModel.toString());
+//						Log.v(null, friendModelList.get(i).getLocation());
+//						Log.v(null, friendModelList.get(i).getState());
+//						Log.v(null, friendModelList.get(i).getLatitude() + "");
+//						Log.v(null, friendModelList.get(i).getLongitude() + "");
+					} else {
+						Log.v(TAG, "current location is null");
+					}
+				} catch (JSONException e) {
+					Log.v(TAG, "Catch -------->>>>>>>>>>>>>>> current location is null");
 				}
-				friendModelList.add(friendModel);
 			}
 		} catch (JSONException e) {
-			e.printStackTrace();
+			Log.v(TAG, "current location is null");
 		}
 		return friendModelList;
 	}

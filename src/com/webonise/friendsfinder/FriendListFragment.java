@@ -103,7 +103,6 @@ public class FriendListFragment extends FragmentActivity implements
 		friendsList = new ArrayList<FriendModel>();
 		friendsList = jsonParser.parseJsonObject(mResponse);
 		callForAdapter();
-
 	}
 
 	private void callForAdapter() {

@@ -22,18 +22,20 @@ import com.webonise.friendsfinder.task.ImageLoaderTask;
 
 public class FriendListAdapter extends BaseAdapter {
 
-	FriendListFragment  mContext;
+	FriendListFragment mContext;
 	Bitmap profilePic;
-	
+	UrlImageHandler uImageHandler;
+
 	private List<FriendModel> friendsList;
 
-	public FriendListAdapter(FriendListFragment mContext, List<FriendModel> friendsList) {
+	public FriendListAdapter(FriendListFragment mContext,
+			List<FriendModel> friendsList) {
 		this.mContext = mContext;
-		this.friendsList = new ArrayList<FriendModel>();
 		this.friendsList = friendsList;
-		for (int i = 0; i < this.friendsList.size(); i+=50)
-			Log.v(null, friendsList.get(i).getName());
-
+		for (int i = 0; i < this.friendsList.size(); i += 50) {
+			Log.v(null, this.friendsList.get(i).getName());
+			// Log.v(null, friendsList.get(i).getLocation());
+		}
 	}
 
 	@Override
@@ -61,26 +63,31 @@ public class FriendListAdapter extends BaseAdapter {
 
 		TextView name = (TextView) convertView.findViewById(R.id.friend);
 		name.setText(friendsList.get(position).getName());
-		Log.v("list",friendsList.get(position).getName());
-		
-//		TextView location = (TextView) convertView.findViewById(R.id.location);
-//		location.setText(friendsList.get(position).getLocation());
-//		Log.v("list",friendsList.get(position).getLocation());
-//		
-//		TextView state = (TextView) convertView.findViewById(R.id.state);
-//		state.setText(" , "+ friendsList.get(position).getState());
-//		Log.v("list",friendsList.get(position).getState());
-//		
-//		ImageLoaderTask iLoaderTask=new ImageLoaderTask(this,friendsList.get(position));
-//		iLoaderTask.execute();
-//		ImageView profilImageView=(ImageView)convertView.findViewById(R.id.profile_pic);
+
+		TextView location = (TextView) convertView.findViewById(R.id.location);
+		location.setText(friendsList.get(position).getLocation());
+
+		TextView state = (TextView) convertView.findViewById(R.id.state);
+		state.setText(" , " + friendsList.get(position).getState());
+
+		// ImageLoaderTask iLoaderTask=new
+		// ImageLoaderTask(this,friendsList.get(position));
+		// iLoaderTask.execute();
+//		ImageView profilImageView = (ImageView) convertView
+//				.findViewById(R.id.profile_pic);
+//		Bitmap profilePicBitmap = UrlImageHandler.getInstance().getUrlImage(
+//				friendsList.get(position).getImageUrl());
 //		profilImageView.setImageBitmap(profilePic);
+		uImageHandler=UrlImageHandler.getInstance();
+		Bitmap imageView = uImageHandler.getUrlImage(friendsList.get(position).getImageUrl());
+		ImageView profilImageView = (ImageView) convertView.findViewById(R.id.profile_pic);
+		profilImageView.setImageBitmap(imageView);
 
 		return convertView;
 	}
 
 	public void setProfilePic(Bitmap result) {
-		profilePic=result;
-		
+		profilePic = result;
+
 	}
 }

@@ -11,16 +11,15 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 public class UrlImageHandler {
-	private static UrlImageHandler imageHandler=new UrlImageHandler();
-	private UrlImageHandler()
-	{
-		
+	private static UrlImageHandler imageHandler = new UrlImageHandler();
+
+	private UrlImageHandler() {
 	}
-	public static UrlImageHandler getInstance()
-	{
+
+	public static UrlImageHandler getInstance() {
 		return imageHandler;
 	}
-	
+
 	public Bitmap getUrlImage(String stringImageUrl) {
 		BitmapFactory.Options bmOptions;
 		bmOptions = new BitmapFactory.Options();
@@ -34,7 +33,8 @@ public class UrlImageHandler {
 		InputStream inputStream = null;
 		try {
 			inputStream = OpenHttpConnection(stringUrl);
-			bitmapImage = BitmapFactory.decodeStream(inputStream, null, mOptions);
+			bitmapImage = BitmapFactory.decodeStream(inputStream, null,
+					mOptions);
 			inputStream.close();
 		} catch (IOException e1) {
 		}
