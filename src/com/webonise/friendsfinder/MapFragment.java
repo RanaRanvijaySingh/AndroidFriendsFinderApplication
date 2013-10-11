@@ -2,7 +2,7 @@ package com.webonise.friendsfinder;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -16,15 +16,20 @@ import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 @SuppressLint("ValidFragment")
-public class MapFragment extends FragmentActivity implements OnClickListener {
+public class MapFragment extends FragmentActivity implements OnClickListener,
+		ImageLoadingListener {
 
 	private GoogleMap googleMap;
 	String stringName;
@@ -38,11 +43,6 @@ public class MapFragment extends FragmentActivity implements OnClickListener {
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.map_fragment);
-
-		imageLoader = ImageLoader.getInstance();
-		ImageLoaderConfiguration ilc = ImageLoaderConfiguration
-				.createDefault(this);
-		imageLoader.init(ilc);
 
 		initializeComponents();
 		initializeMap();
@@ -67,25 +67,11 @@ public class MapFragment extends FragmentActivity implements OnClickListener {
 	}
 
 	public void setMarker() {
-
+		imageLoader = ImageLoader.getInstance();
 		View view = LayoutInflater.from(this).inflate(R.layout.friend_info,
 				null);
 		ImageView imageView = (ImageView) view.findViewById(R.id.friend_pic);
-		imageLoader.displayImage(stringImageUrl, imageView);
-		Log.v("image", imageView.toString());
-
-		Drawable drawble = imageView.getDrawable();
-		Log.v(null, drawble.toString());
-		// BitmapDescriptor icon=
-		// BitmapDescriptorFactory.fromBitmap(((BitmapDrawable)drawble).getBitmap());
-
-		LatLng position = new LatLng(doubleLatitude, doubleLongitude);
-		Marker location = googleMap.addMarker(new MarkerOptions().visible(true)
-				.title(stringName).position(position));
-		CameraPosition cameraPosition = new CameraPosition.Builder()
-				.target(position).zoom(12).build();
-		googleMap.animateCamera(CameraUpdateFactory
-				.newCameraPosition(cameraPosition));
+		imageLoader.displayImage(stringImageUrl, imageView, this);
 	}
 
 	private void setMarkerValues() {
@@ -139,5 +125,37 @@ public class MapFragment extends FragmentActivity implements OnClickListener {
 			break;
 		}
 
+	}
+
+	@Override
+	public void onLoadingStarted(String imageUri, View view) {
+		Log.v("Map Fragment", "Image Loading started");
+	}
+
+	@Override
+	public void onLoadingFailed(String imageUri, View view,
+			FailReason failReason) {
+	}
+
+	@Override
+	public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+		Log.v("Map Fragment", "Image Loading Completed");
+		@SuppressWarnings("unused")
+		BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(loadedImage);
+		setMarkerImage(icon);
+	}
+
+	@Override
+	public void onLoadingCancelled(String imageUri, View view) {
+	}
+
+	private void setMarkerImage(BitmapDescriptor icon) {
+		LatLng position = new LatLng(doubleLatitude, doubleLongitude);
+		Marker location = googleMap.addMarker(new MarkerOptions().visible(true)
+				.title(stringName).position(position).icon(icon));
+		CameraPosition cameraPosition = new CameraPosition.Builder()
+				.target(position).zoom(12).build();
+		googleMap.animateCamera(CameraUpdateFactory
+				.newCameraPosition(cameraPosition));
 	}
 }
