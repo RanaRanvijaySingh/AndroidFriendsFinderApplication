@@ -33,10 +33,6 @@ public class FriendListAdapter extends BaseAdapter {
 		ImageLoaderConfiguration ilc = ImageLoaderConfiguration
 				.createDefault(mContext);
 		imageLoader.init(ilc);
-		for (int i = 0; i < this.friendsList.size(); i += 50) {
-			Log.v(null, this.friendsList.get(i).getName());
-			// Log.v(null, friendsList.get(i).getLocation());
-		}
 	}
 
 	@Override
