@@ -7,13 +7,11 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -21,7 +19,6 @@ import com.facebook.Response;
 import com.webonise.friendsfinder.adapter.FriendListAdapter;
 import com.webonise.friendsfinder.model.FriendModel;
 import com.webonise.friendsfinder.parser.JsonParser;
-import com.webonise.friendsfinder.task.RequestServiceTask;
 import com.webonise.friendsfinder.webservice.FacebookService;
 
 @SuppressLint({ "ValidFragment", "ResourceAsColor" })
@@ -36,11 +33,31 @@ public class FriendListFragment extends FragmentActivity implements
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		final Intent intent = new Intent(this, MapFragment.class);
 		setContentView(R.layout.friend_list_fragment);
 		initializeComponents();
-		FacebookService mService=FacebookService.getIntance();
+		FacebookService mService = FacebookService.getIntance();
 		listView = (ListView) findViewById(R.id.frinds_list);
 		mService.getFriendsList(this);
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+				FriendModel friend = new FriendModel();
+				friend = friendsList.get(position);
+				Log.v("clicked", friend.getName());
+				Log.v("clicked", friend.getLocation());
+				Log.v("clicked", friend.getState());
+				Log.v("clicked", "" + friend.getLatitude());
+				Log.v("clicked", "" + friend.getLongitude());
+				intent.putExtra("name", friend.getName());
+				intent.putExtra("longitude", friend.getLongitude());
+				intent.putExtra("latitude", friend.getLatitude());
+				intent.putExtra("location", friend.getLocation());
+				intent.putExtra("imageUrl", friend.getImageUrl());
+				startActivity(intent);
+			}
+		});
 		Log.v(TAG, "__friends__");
 	}
 
@@ -59,42 +76,6 @@ public class FriendListFragment extends FragmentActivity implements
 		startActivity(intent);
 	}
 
-	// @Override
-	// public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	// Bundle savedInstanceState) {
-	//
-	// View view = inflater.inflate(R.layout.friend_list_fragment, container,
-	// false);
-	// listView = (ListView) view.findViewById(R.id.frinds_list);
-	//
-	// // new RequestServiceTask().execute(); //not using
-	//
-	// // FacebookService mService = FacebookService.getIntance();
-	// // mService.getFriendsList(this);
-	//
-	// // listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-	// // {
-	// // @Override
-	// // public void onItemClick(AdapterView<?> arg0, View arg1,
-	// // int position, long arg3) {
-	// //
-	// // FriendModel friend = new FriendModel();
-	// // friend = friendsList.get(position);
-	// // Log.v("clicked", friend.getName());
-	// // Log.v("clicked", friend.getLocation());
-	// // Log.v("clicked", friend.getState());
-	// // Log.v("clicked", "" + friend.getLatitude());
-	// // Log.v("clicked", "" + friend.getLongitude());
-	// //
-	// // mainActivity.getLocationInMap(friend.getLongitude(),
-	// // friend.getLatitude(), friend.getName(),
-	// // friend.getImageUrl());
-	// // }
-	// // });
-	// Log.v(TAG, "in the friends list fragment");
-	// return view;
-	// }
-
 	public void onFriendsListResult(Response response) {
 		Response mResponse = response;
 		friendsList = new ArrayList<FriendModel>();
@@ -106,7 +87,7 @@ public class FriendListFragment extends FragmentActivity implements
 	}
 
 	private void callForAdapter() {
-		FriendListAdapter adapter = new FriendListAdapter(this,friendsList);
+		FriendListAdapter adapter = new FriendListAdapter(this, friendsList);
 		listView.setAdapter(adapter);
 	}
 }

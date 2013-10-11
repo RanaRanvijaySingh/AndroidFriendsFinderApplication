@@ -38,7 +38,6 @@ public class FacebookService {
 										public void onCompleted(GraphUser user,
 												Response response) {
 											Log.v("", "session created");
-											// getFriendsList();
 										}
 
 									});

@@ -7,6 +7,10 @@
     <string name="app_id">223869324447019</string>
     <string name="map">Map</string>
     <string name="friends">Friends</string>
+    <string name="normal">Normal</string>
+    <string name="hybrid">Hybrid</string>
+    <string name="terrain">Terrain</string>
+    <string name="satellite">Satellite</string>
 
     <color name="gray">#aa8</color>
     <color name="green">#1f1</color>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="1dp" >
+
+    <Button
+        android:id="@+id/normal"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_weight=".25"
+        android:background="@drawable/item_pressed"
+        android:padding="2dp"
+        android:text="@string/normal"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/terrain"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_weight=".25"
+        android:background="@drawable/item_pressed"
+        android:padding="2dp"
+        android:text="@string/terrain"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/satellite"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_weight=".25"
+        android:background="@drawable/item_pressed"
+        android:padding="2dp"
+        android:text="@string/satellite"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/hybrid"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_weight=".25"
+        android:background="@drawable/item_pressed"
+        android:padding="2dp"
+        android:text="@string/hybrid"
+        android:textSize="12sp" />
+
+</LinearLayout>
